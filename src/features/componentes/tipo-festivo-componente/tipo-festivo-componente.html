@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <mat-icon>category</mat-icon>
+  <div class="barraTituloCRUD">
+    Tipos de Festivo
+  </div>
+</mat-toolbar>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Buscar</mat-label>
+    <input matInput [(ngModel)]="textoBusqueda" (keyup.enter)="buscar()">
+  </mat-form-field>
+  <button matButton="filled" color="primary" (click)="buscar()">Buscar</button>
+</div>
+
+<div>
+  <button matButton="filled" (click)="agregar()">Agregar</button>
+  <button matButton="tonal" (click)="modificar()">Modificar</button>
+  <button matButton="outlined" (click)="verificarEliminar()">Eliminar</button>
+  <ngx-datatable [headerHeight]="50" [footerHeight]="50"
+                 [rows]="tipos" [columns]="columnas" class="dark" [limit]="10"
+                 [columnMode]="modoColumna.force" (activate)="escoger($event)"
+                 [selectionType]="'single'">
+  </ngx-datatable>
+</div>
+
