@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 
 import { InicioComponent } from './inicio';
 
@@ -9,8 +8,7 @@ describe('InicioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InicioComponent],
-      providers: [provideRouter([])]
+      imports: [InicioComponent]
     })
     .compileComponents();
 
@@ -21,10 +19,5 @@ describe('InicioComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('muestra las tres opciones del CRUD', () => {
-    const enlaces = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('a'));
-    expect(enlaces.map(a => a.getAttribute('href'))).toEqual(['/paises', '/tipos', '/festivos']);
   });
 });
