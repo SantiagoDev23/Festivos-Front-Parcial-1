@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReferenciasMaterialModule} from '../../../shared/modulos/referencias-material.module';
 import {FormsModule} from '@angular/forms';
 import {ColumnMode, NgxDatatableModule} from '@swimlane/ngx-datatable';
@@ -32,8 +32,7 @@ export class PaisComponente implements OnInit {
 
 
   constructor(private paisServicio: PaisServicio,
-              private dialogoServicio: MatDialog,
-              private cdr: ChangeDetectorRef) {
+              private dialogoServicio: MatDialog) {
 
   }
 
@@ -53,7 +52,6 @@ export class PaisComponente implements OnInit {
       {
         next: respuesta => {
           this.paises = respuesta.sort((a, b) => a.nombre.localeCompare(b.nombre));
-          this.cdr.markForCheck();
         },
         error: error => {
           window.alert(error.message);
@@ -70,7 +68,6 @@ export class PaisComponente implements OnInit {
         {
           next: response => {
             this.paises = response;
-            this.cdr.markForCheck();
           },
           error: error => {
             window.alert(error.message);
@@ -83,7 +80,7 @@ export class PaisComponente implements OnInit {
   public agregar() {
     const dialogoAgregar = this.dialogoServicio.open(PaisEditarComponente, {
       width: '500px',
-      height: '250px',
+      height: '300px',
       data: {
         encabezado: `Agregando País`,
         pais: {
@@ -114,7 +111,7 @@ export class PaisComponente implements OnInit {
     if (this.paisEscogido) {
       const dialogoModificar = this.dialogoServicio.open(PaisEditarComponente, {
         width: '500px',
-        height: '250px',
+        height: '300px',
         data: {
           encabezado: `Editando el país [${this.paisEscogido.nombre}]`,
           pais: {...this.paisEscogido}
@@ -127,8 +124,6 @@ export class PaisComponente implements OnInit {
             this.paisServicio.modificar(datos.pais).subscribe({
               next: respuesta => {
                 this.paises[this.indicePaisEscogido] = respuesta;
-                this.paises = [...this.paises];
-                this.cdr.markForCheck();
               },
               error: error => {
                 window.alert(error.message);
@@ -158,15 +153,10 @@ export class PaisComponente implements OnInit {
           if (datos) {
             this.paisServicio.eliminar(datos.id).subscribe({
               next: respuesta => {
-                this.paisEscogido = undefined;
                 this.listar();
               },
               error: error => {
-                if (error.status == 409) {
-                  window.alert("No se puede eliminar el país porque tiene festivos asociados");
-                } else {
-                  window.alert(error.message);
-                }
+                window.alert(error.message);
               }
             })
           }
