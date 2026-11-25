@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <mat-icon>category</mat-icon>
+  <img src="iconos/TipoFestivo.png">
   <div class="barraTituloCRUD">
     Tipos de Festivo
   </div>
@@ -8,7 +8,7 @@
 <div>
   <mat-form-field appearance="fill">
     <mat-label>Buscar</mat-label>
-    <input matInput [(ngModel)]="textoBusqueda" (keyup.enter)="buscar()">
+    <input matInput [(ngModel)]="textoBusqueda">
   </mat-form-field>
   <button matButton="filled" color="primary" (click)="buscar()">Buscar</button>
 </div>

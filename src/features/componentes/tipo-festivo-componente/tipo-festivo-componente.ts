@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReferenciasMaterialModule} from '../../../shared/modulos/referencias-material.module';
 import {FormsModule} from '@angular/forms';
 import {ColumnMode, NgxDatatableModule} from '@swimlane/ngx-datatable';
@@ -32,8 +32,7 @@ export class TipoFestivoComponente implements OnInit {
 
 
   constructor(private tipoServicio: TipoFestivoServicio,
-              private dialogoServicio: MatDialog,
-              private cdr: ChangeDetectorRef) {
+              private dialogoServicio: MatDialog) {
 
   }
 
@@ -53,7 +52,6 @@ export class TipoFestivoComponente implements OnInit {
       {
         next: respuesta => {
           this.tipos = respuesta.sort((a, b) => a.id - b.id);
-          this.cdr.markForCheck();
         },
         error: error => {
           window.alert(error.message);
@@ -70,7 +68,6 @@ export class TipoFestivoComponente implements OnInit {
         {
           next: response => {
             this.tipos = response;
-            this.cdr.markForCheck();
           },
           error: error => {
             window.alert(error.message);
@@ -83,7 +80,7 @@ export class TipoFestivoComponente implements OnInit {
   public agregar() {
     const dialogoAgregar = this.dialogoServicio.open(TipoFestivoEditarComponente, {
       width: '500px',
-      height: '250px',
+      height: '300px',
       data: {
         encabezado: `Agregando Tipo de Festivo`,
         tipo: {
@@ -114,7 +111,7 @@ export class TipoFestivoComponente implements OnInit {
     if (this.tipoEscogido) {
       const dialogoModificar = this.dialogoServicio.open(TipoFestivoEditarComponente, {
         width: '500px',
-        height: '250px',
+        height: '300px',
         data: {
           encabezado: `Editando el tipo de festivo [${this.tipoEscogido.tipo}]`,
           tipo: {...this.tipoEscogido}
@@ -127,8 +124,6 @@ export class TipoFestivoComponente implements OnInit {
             this.tipoServicio.modificar(datos.tipo).subscribe({
               next: respuesta => {
                 this.tipos[this.indiceTipoEscogido] = respuesta;
-                this.tipos = [...this.tipos];
-                this.cdr.markForCheck();
               },
               error: error => {
                 window.alert(error.message);
@@ -158,15 +153,10 @@ export class TipoFestivoComponente implements OnInit {
           if (datos) {
             this.tipoServicio.eliminar(datos.id).subscribe({
               next: respuesta => {
-                this.tipoEscogido = undefined;
                 this.listar();
               },
               error: error => {
-                if (error.status == 409) {
-                  window.alert("No se puede eliminar el tipo porque tiene festivos asociados");
-                } else {
-                  window.alert(error.message);
-                }
+                window.alert(error.message);
               }
             })
           }
