@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { App } from './app';
 
@@ -6,7 +7,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), provideHttpClient()]
     }).compileComponents();
   });
 
@@ -23,10 +24,12 @@ describe('App', () => {
     expect(compiled.querySelector('mat-toolbar')?.textContent).toContain('Festivos');
   });
 
-  it('muestra el menú con las tres opciones del CRUD', async () => {
+  it('muestra Login y oculta el menú cuando no hay usuario', async () => {
     const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
     await fixture.whenStable();
-    const enlaces = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('mat-toolbar a'));
-    expect(enlaces.map(a => a.getAttribute('href'))).toEqual(['/inicio', '/paises', '/tipos', '/festivos']);
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('mat-toolbar')?.textContent).toContain('Login');
+    expect(compiled.querySelector('.menu-toggle')).toBeNull();
   });
 });
