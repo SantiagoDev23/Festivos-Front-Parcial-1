@@ -25,8 +25,4 @@ export class PaisEditarComponente {
   ) {
   }
 
-  public datosValidos(): boolean {
-    return this.datos.pais.nombre.trim().length > 0;
-  }
-
 }

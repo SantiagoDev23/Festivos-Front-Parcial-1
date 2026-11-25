@@ -25,10 +25,4 @@ describe('PaisEditarComponente', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('solo es válido cuando el nombre no está vacío', () => {
-    expect(component.datosValidos()).toBe(false);
-    component.datos.pais.nombre = 'COLOMBIA';
-    expect(component.datosValidos()).toBe(true);
-  });
 });
