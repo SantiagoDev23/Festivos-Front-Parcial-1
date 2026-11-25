@@ -25,10 +25,4 @@ describe('TipoFestivoEditarComponente', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('solo es válido cuando el tipo no está vacío', () => {
-    expect(component.datosValidos()).toBe(false);
-    component.datos.tipo.tipo = 'Fijo';
-    expect(component.datosValidos()).toBe(true);
-  });
 });

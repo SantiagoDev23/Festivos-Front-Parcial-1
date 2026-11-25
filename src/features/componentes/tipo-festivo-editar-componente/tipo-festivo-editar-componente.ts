@@ -25,8 +25,4 @@ export class TipoFestivoEditarComponente {
   ) {
   }
 
-  public datosValidos(): boolean {
-    return this.datos.tipo.tipo.trim().length > 0;
-  }
-
 }
