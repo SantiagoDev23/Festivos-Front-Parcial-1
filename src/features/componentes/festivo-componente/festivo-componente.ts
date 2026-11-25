@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {Festivo} from '../../../shared/entidades/Festivo';
 import {ColumnMode, NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatDialog} from '@angular/material/dialog';
@@ -45,8 +45,7 @@ export class FestivoComponente {
   constructor(private festivoServicio: FestivoServicio,
               private paisServicio: PaisServicio,
               private tipoServicio: TipoFestivoServicio,
-              private dialogoServicio: MatDialog,
-              private cdr: ChangeDetectorRef) {
+              private dialogoServicio: MatDialog) {
 
   }
 
@@ -69,7 +68,6 @@ export class FestivoComponente {
         next: respuesta => {
           this.festivos = respuesta.sort((a, b) => a.pais.nombre.localeCompare(b.pais.nombre)
             || a.mes - b.mes || a.dia - b.dia || a.nombre.localeCompare(b.nombre));
-          this.cdr.markForCheck();
         },
         error: error => {
           window.alert(error.message);
@@ -83,7 +81,6 @@ export class FestivoComponente {
       {
         next: response => {
           this.paises = response.sort((a, b) => a.nombre.localeCompare(b.nombre));
-          this.cdr.markForCheck();
         },
         error: error => {
           window.alert(error.message);
@@ -97,7 +94,6 @@ export class FestivoComponente {
       {
         next: response => {
           this.tipos = response.sort((a, b) => a.id - b.id);
-          this.cdr.markForCheck();
         },
         error: error => {
           window.alert(error.message);
@@ -114,7 +110,6 @@ export class FestivoComponente {
         {
           next: response => {
             this.festivos = response;
-            this.cdr.markForCheck();
           },
           error: error => {
             window.alert(error.message);
@@ -186,8 +181,6 @@ export class FestivoComponente {
             this.festivoServicio.modificar(datos.festivo).subscribe({
               next: respuesta => {
                 this.festivos[this.indiceFestivoEscogido] = respuesta;
-                this.festivos = [...this.festivos];
-                this.cdr.markForCheck();
               },
               error: error => {
                 window.alert(error.message);
@@ -217,7 +210,6 @@ export class FestivoComponente {
           if (datos) {
             this.festivoServicio.eliminar(datos.id).subscribe({
               next: respuesta => {
-                this.festivoEscogido = undefined;
                 this.listar();
               },
               error: error => {
