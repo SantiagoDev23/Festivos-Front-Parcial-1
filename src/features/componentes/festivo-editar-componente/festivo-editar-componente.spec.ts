@@ -32,13 +32,4 @@ describe('FestivoEditarComponente', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('es válido solo con nombre, país y tipo', () => {
-    expect(component.datosValidos()).toBe(false);
-    component.datos.festivo.nombre = 'Navidad';
-    component.datos.festivo.pais = {id: 1, nombre: 'COLOMBIA'};
-    expect(component.datosValidos()).toBe(false);
-    component.datos.festivo.tipo = {id: 1, tipo: 'Fijo'};
-    expect(component.datosValidos()).toBe(true);
-  });
 });

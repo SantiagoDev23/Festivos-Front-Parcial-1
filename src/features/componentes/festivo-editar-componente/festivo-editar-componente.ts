@@ -38,12 +38,4 @@ export class FestivoEditarComponente {
   compararTipos(t1: TipoFestivo, t2: TipoFestivo): boolean {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
-
-  public datosValidos(): boolean {
-    const festivo = this.datos.festivo;
-    return festivo.nombre.trim().length > 0
-      && festivo.pais.id > 0
-      && festivo.tipo.id > 0
-      && festivo.dia != null && festivo.mes != null && festivo.diasPascua != null;
-  }
 }
