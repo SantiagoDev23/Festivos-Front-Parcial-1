@@ -8,6 +8,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 - Node.js y npm.
 - La API de Festivos corriendo en `http://localhost:8080` (la URL base se configura en `src/environments/environment.ts`).
+- Un usuario registrado en la tabla `usuario` de la base de datos: la API pide iniciar sesión (JWT) para consultar y modificar.
 
 ## Estructura
 
@@ -15,8 +16,10 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 src/
 ├── app/                      Configuración, rutas y componente raíz
 ├── core/
+│   ├── guardas/              Guarda de las rutas
+│   ├── interceptores/        Envía el token en cada petición
 │   └── servicios/            Servicios que consumen la API
-├── features/componentes/     Pantallas: inicio, países, tipos de festivo y festivos
+├── features/componentes/     Pantallas: inicio, login, países, tipos de festivo y festivos
 └── shared/
     ├── componentes/          Diálogo de confirmación
     ├── entidades/            Interfaces de las entidades
