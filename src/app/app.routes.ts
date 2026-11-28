@@ -4,6 +4,7 @@ import {PaisComponente} from '../features/componentes/pais-componente/pais-compo
 import {TipoFestivoComponente} from '../features/componentes/tipo-festivo-componente/tipo-festivo-componente';
 import {FestivoComponente} from '../features/componentes/festivo-componente/festivo-componente';
 import {AutorizacionGuarda} from '../core/guardas/autorizacion.guarda';
+import {CalendarioComponente} from '../features/componentes/calendario-componente/calendario-componente';
 
 export const RUTA_DEFAULT = '/inicio';
 
@@ -12,5 +13,6 @@ export const routes: Routes = [
   {path: "inicio", component: InicioComponent},
   {path: "paises", component: PaisComponente, canActivate: [AutorizacionGuarda]},
   {path: "tipos", component: TipoFestivoComponente, canActivate: [AutorizacionGuarda]},
-  {path: "festivos", component: FestivoComponente, canActivate: [AutorizacionGuarda]}
+  {path: "festivos", component: FestivoComponente, canActivate: [AutorizacionGuarda]},
+  {path: "calendario", component: CalendarioComponente, canActivate: [AutorizacionGuarda]}
 ];

@@ -28,6 +28,7 @@ export class App {
     {titulo: 'Países', url: 'paises', icono: 'iconos/Pais.png'},
     {titulo: 'Tipos de Festivo', url: 'tipos', icono: 'iconos/TipoFestivo.png'},
     {titulo: 'Festivos', url: 'festivos', icono: 'iconos/Festivo.png'},
+    {titulo: 'Consultar Festivos', url: 'calendario', icono: 'iconos/Festivo.png'},
   ];
 
   constructor(private dialogServicio: MatDialog,
